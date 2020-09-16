@@ -1,0 +1,805 @@
+
+seatdoortogether.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000418  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000120  00800060  00000418  000004ac  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          0000000e  00800180  00800180  000005cc  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  000005cc  2**0
+                  CONTENTS, READONLY
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  000005fc  2**2
+                  CONTENTS, READONLY
+  5 .debug_aranges 00000048  00000000  00000000  00000638  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_info   00001028  00000000  00000000  00000680  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 0000070b  00000000  00000000  000016a8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_line   000005c5  00000000  00000000  00001db3  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_frame  00000090  00000000  00000000  00002378  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    00000365  00000000  00000000  00002408  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_loc    0000086c  00000000  00000000  0000276d  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_ranges 00000050  00000000  00000000  00002fd9  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	12 c0       	rjmp	.+36     	; 0x26 <__ctors_end>
+   2:	2c c0       	rjmp	.+88     	; 0x5c <__bad_interrupt>
+   4:	2b c0       	rjmp	.+86     	; 0x5c <__bad_interrupt>
+   6:	2a c0       	rjmp	.+84     	; 0x5c <__bad_interrupt>
+   8:	29 c0       	rjmp	.+82     	; 0x5c <__bad_interrupt>
+   a:	28 c0       	rjmp	.+80     	; 0x5c <__bad_interrupt>
+   c:	27 c0       	rjmp	.+78     	; 0x5c <__bad_interrupt>
+   e:	26 c0       	rjmp	.+76     	; 0x5c <__bad_interrupt>
+  10:	25 c0       	rjmp	.+74     	; 0x5c <__bad_interrupt>
+  12:	24 c0       	rjmp	.+72     	; 0x5c <__bad_interrupt>
+  14:	23 c0       	rjmp	.+70     	; 0x5c <__bad_interrupt>
+  16:	22 c0       	rjmp	.+68     	; 0x5c <__bad_interrupt>
+  18:	21 c0       	rjmp	.+66     	; 0x5c <__bad_interrupt>
+  1a:	20 c0       	rjmp	.+64     	; 0x5c <__bad_interrupt>
+  1c:	1f c0       	rjmp	.+62     	; 0x5c <__bad_interrupt>
+  1e:	1e c0       	rjmp	.+60     	; 0x5c <__bad_interrupt>
+  20:	1d c0       	rjmp	.+58     	; 0x5c <__bad_interrupt>
+  22:	1c c0       	rjmp	.+56     	; 0x5c <__bad_interrupt>
+  24:	1b c0       	rjmp	.+54     	; 0x5c <__bad_interrupt>
+
+00000026 <__ctors_end>:
+  26:	11 24       	eor	r1, r1
+  28:	1f be       	out	0x3f, r1	; 63
+  2a:	cf e5       	ldi	r28, 0x5F	; 95
+  2c:	d4 e0       	ldi	r29, 0x04	; 4
+  2e:	de bf       	out	0x3e, r29	; 62
+  30:	cd bf       	out	0x3d, r28	; 61
+
+00000032 <__do_copy_data>:
+  32:	11 e0       	ldi	r17, 0x01	; 1
+  34:	a0 e6       	ldi	r26, 0x60	; 96
+  36:	b0 e0       	ldi	r27, 0x00	; 0
+  38:	e8 e1       	ldi	r30, 0x18	; 24
+  3a:	f4 e0       	ldi	r31, 0x04	; 4
+  3c:	02 c0       	rjmp	.+4      	; 0x42 <__SREG__+0x3>
+  3e:	05 90       	lpm	r0, Z+
+  40:	0d 92       	st	X+, r0
+  42:	a0 38       	cpi	r26, 0x80	; 128
+  44:	b1 07       	cpc	r27, r17
+  46:	d9 f7       	brne	.-10     	; 0x3e <__SP_H__>
+
+00000048 <__do_clear_bss>:
+  48:	21 e0       	ldi	r18, 0x01	; 1
+  4a:	a0 e8       	ldi	r26, 0x80	; 128
+  4c:	b1 e0       	ldi	r27, 0x01	; 1
+  4e:	01 c0       	rjmp	.+2      	; 0x52 <.do_clear_bss_start>
+
+00000050 <.do_clear_bss_loop>:
+  50:	1d 92       	st	X+, r1
+
+00000052 <.do_clear_bss_start>:
+  52:	ae 38       	cpi	r26, 0x8E	; 142
+  54:	b2 07       	cpc	r27, r18
+  56:	e1 f7       	brne	.-8      	; 0x50 <.do_clear_bss_loop>
+  58:	22 d0       	rcall	.+68     	; 0x9e <main>
+  5a:	dc c1       	rjmp	.+952    	; 0x414 <_exit>
+
+0000005c <__bad_interrupt>:
+  5c:	d1 cf       	rjmp	.-94     	; 0x0 <__vectors>
+
+0000005e <adc>:
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+  5e:	87 e8       	ldi	r24, 0x87	; 135
+  60:	86 b9       	out	0x06, r24	; 6
+  62:	80 ec       	ldi	r24, 0xC0	; 192
+  64:	87 b9       	out	0x07, r24	; 7
+  66:	08 95       	ret
+
+00000068 <tt>:
+#ifndef _UART_H_
+#define _UART_H_
+
+void tt( char t)
+{
+	while(!(UCSRA&(1<<UDRE)));				// hold until conversion is completed
+  68:	5d 9b       	sbis	0x0b, 5	; 11
+  6a:	fe cf       	rjmp	.-4      	; 0x68 <tt>
+	UDR=t;									// PUT data into UDR registor
+  6c:	8c b9       	out	0x0c, r24	; 12
+  6e:	08 95       	ret
+
+00000070 <usart_tx>:
+}
+void usart_tx( char *tx)
+{
+  70:	cf 93       	push	r28
+  72:	df 93       	push	r29
+  74:	ec 01       	movw	r28, r24
+	while(*tx!='\0')						// transfer data until we get NULL character ('\0')
+  76:	88 81       	ld	r24, Y
+  78:	88 23       	and	r24, r24
+  7a:	29 f0       	breq	.+10     	; 0x86 <usart_tx+0x16>
+  7c:	21 96       	adiw	r28, 0x01	; 1
+	{
+		tt(*tx);
+  7e:	f4 df       	rcall	.-24     	; 0x68 <tt>
+	while(!(UCSRA&(1<<UDRE)));				// hold until conversion is completed
+	UDR=t;									// PUT data into UDR registor
+}
+void usart_tx( char *tx)
+{
+	while(*tx!='\0')						// transfer data until we get NULL character ('\0')
+  80:	89 91       	ld	r24, Y+
+  82:	81 11       	cpse	r24, r1
+  84:	fc cf       	rjmp	.-8      	; 0x7e <usart_tx+0xe>
+	{
+		tt(*tx);
+		tx++;								// next character
+	}
+}
+  86:	df 91       	pop	r29
+  88:	cf 91       	pop	r28
+  8a:	08 95       	ret
+
+0000008c <u_init>:
+void u_init()
+{
+	UBRRL=12;					// PUT that value for 9600 BAUDRATE by chart
+  8c:	8c e0       	ldi	r24, 0x0C	; 12
+  8e:	89 b9       	out	0x09, r24	; 9
+	UCSRB|=(1<<TXEN)|(1<<RXEN);				// transmitt enable
+  90:	8a b1       	in	r24, 0x0a	; 10
+  92:	88 61       	ori	r24, 0x18	; 24
+  94:	8a b9       	out	0x0a, r24	; 10
+	UCSRC|=(1<<URSEL)|(1<<UCSZ0)|(1<<UCSZ1);	// setting for 8 bit character size (ex: 'A' = 01000001)
+  96:	80 b5       	in	r24, 0x20	; 32
+  98:	86 68       	ori	r24, 0x86	; 134
+  9a:	80 bd       	out	0x20, r24	; 32
+  9c:	08 95       	ret
+
+0000009e <main>:
+
+#endif
+char arr1[10];
+
+int main(void)
+{
+  9e:	cf 93       	push	r28
+  a0:	df 93       	push	r29
+  a2:	cd b7       	in	r28, 0x3d	; 61
+  a4:	de b7       	in	r29, 0x3e	; 62
+  a6:	2a 97       	sbiw	r28, 0x0a	; 10
+  a8:	0f b6       	in	r0, 0x3f	; 63
+  aa:	f8 94       	cli
+  ac:	de bf       	out	0x3e, r29	; 62
+  ae:	0f be       	out	0x3f, r0	; 63
+  b0:	cd bf       	out	0x3d, r28	; 61
+    /* Replace with your application code */
+	adc();								// ADC initialization
+  b2:	d5 df       	rcall	.-86     	; 0x5e <adc>
+	u_init();
+  b4:	eb df       	rcall	.-42     	; 0x8c <u_init>
+	int attend=0;
+	int flag=0;
+	char arr[10];
+	//char update[40] = {"GET /update?key=DGXX4163Z7XEXE2I&field3="};
+	DDRB = 0B00000000;
+  b6:	17 ba       	out	0x17, r1	; 23
+	usart_tx("AT\r\n");
+  b8:	80 e6       	ldi	r24, 0x60	; 96
+  ba:	90 e0       	ldi	r25, 0x00	; 0
+  bc:	d9 df       	rcall	.-78     	; 0x70 <usart_tx>
+  be:	2f e7       	ldi	r18, 0x7F	; 127
+  c0:	8f e4       	ldi	r24, 0x4F	; 79
+  c2:	92 e1       	ldi	r25, 0x12	; 18
+  c4:	21 50       	subi	r18, 0x01	; 1
+  c6:	80 40       	sbci	r24, 0x00	; 0
+  c8:	90 40       	sbci	r25, 0x00	; 0
+  ca:	e1 f7       	brne	.-8      	; 0xc4 <main+0x26>
+  cc:	00 c0       	rjmp	.+0      	; 0xce <main+0x30>
+  ce:	00 00       	nop
+	_delay_ms(500);
+	usart_tx("AT+CWMODE=3\r\n");
+  d0:	85 e6       	ldi	r24, 0x65	; 101
+  d2:	90 e0       	ldi	r25, 0x00	; 0
+  d4:	cd df       	rcall	.-102    	; 0x70 <usart_tx>
+  d6:	2f e7       	ldi	r18, 0x7F	; 127
+  d8:	82 ea       	ldi	r24, 0xA2	; 162
+  da:	99 e1       	ldi	r25, 0x19	; 25
+  dc:	21 50       	subi	r18, 0x01	; 1
+  de:	80 40       	sbci	r24, 0x00	; 0
+  e0:	90 40       	sbci	r25, 0x00	; 0
+  e2:	e1 f7       	brne	.-8      	; 0xdc <main+0x3e>
+  e4:	00 c0       	rjmp	.+0      	; 0xe6 <main+0x48>
+  e6:	00 00       	nop
+	_delay_ms(700);
+	usart_tx("AT+CWJAP=\"Verma\",\"12345678\"\r\n");
+  e8:	83 e7       	ldi	r24, 0x73	; 115
+  ea:	90 e0       	ldi	r25, 0x00	; 0
+  ec:	c1 df       	rcall	.-126    	; 0x70 <usart_tx>
+  ee:	2f ef       	ldi	r18, 0xFF	; 255
+  f0:	8c ed       	ldi	r24, 0xDC	; 220
+  f2:	9d e6       	ldi	r25, 0x6D	; 109
+  f4:	21 50       	subi	r18, 0x01	; 1
+  f6:	80 40       	sbci	r24, 0x00	; 0
+  f8:	90 40       	sbci	r25, 0x00	; 0
+  fa:	e1 f7       	brne	.-8      	; 0xf4 <main+0x56>
+  fc:	00 c0       	rjmp	.+0      	; 0xfe <main+0x60>
+  fe:	00 00       	nop
+	_delay_ms(3000);
+	usart_tx("AT+CIPMUX=1\r\n");
+ 100:	81 e9       	ldi	r24, 0x91	; 145
+ 102:	90 e0       	ldi	r25, 0x00	; 0
+ 104:	b5 df       	rcall	.-150    	; 0x70 <usart_tx>
+ 106:	2f ef       	ldi	r18, 0xFF	; 255
+ 108:	8e e9       	ldi	r24, 0x9E	; 158
+ 10a:	94 e2       	ldi	r25, 0x24	; 36
+ 10c:	21 50       	subi	r18, 0x01	; 1
+ 10e:	80 40       	sbci	r24, 0x00	; 0
+ 110:	90 40       	sbci	r25, 0x00	; 0
+ 112:	e1 f7       	brne	.-8      	; 0x10c <main+0x6e>
+ 114:	00 c0       	rjmp	.+0      	; 0x116 <main+0x78>
+ 116:	00 00       	nop
+	_delay_ms(1000);
+	usart_tx("AT+CIPSERVER=1,80\r\n");
+ 118:	8f e9       	ldi	r24, 0x9F	; 159
+ 11a:	90 e0       	ldi	r25, 0x00	; 0
+ 11c:	a9 df       	rcall	.-174    	; 0x70 <usart_tx>
+ 11e:	2f ef       	ldi	r18, 0xFF	; 255
+ 120:	8d e3       	ldi	r24, 0x3D	; 61
+ 122:	99 e4       	ldi	r25, 0x49	; 73
+ 124:	21 50       	subi	r18, 0x01	; 1
+ 126:	80 40       	sbci	r24, 0x00	; 0
+ 128:	90 40       	sbci	r25, 0x00	; 0
+ 12a:	e1 f7       	brne	.-8      	; 0x124 <main+0x86>
+ 12c:	00 c0       	rjmp	.+0      	; 0x12e <main+0x90>
+ 12e:	00 00       	nop
+{
+    /* Replace with your application code */
+	adc();								// ADC initialization
+	u_init();
+	int attend=0;
+	int flag=0;
+ 130:	a1 2c       	mov	r10, r1
+ 132:	b1 2c       	mov	r11, r1
+int main(void)
+{
+    /* Replace with your application code */
+	adc();								// ADC initialization
+	u_init();
+	int attend=0;
+ 134:	c1 2c       	mov	r12, r1
+ 136:	d1 2c       	mov	r13, r1
+				//_delay_ms(1000);
+			}
+		}
+		else if(as>130&&flag==1)
+		{
+			flag=0;
+ 138:	61 2c       	mov	r6, r1
+ 13a:	71 2c       	mov	r7, r1
+		//usart_tx("\r\n");				// (\r --> for new row)(\n --> for new line) both to press enter
+		//_delay_ms(1000);
+		PORTB=0B00000000;				// delay of one second
+		if(as<=130&&flag==0)
+		{
+			flag=1;
+ 13c:	88 24       	eor	r8, r8
+ 13e:	83 94       	inc	r8
+ 140:	91 2c       	mov	r9, r1
+    } else if (__radix < 2 || __radix > 36) {
+	*__s = 0;
+	return __s;
+    } else {
+	extern char *__itoa_ncheck (int, char *, unsigned char);
+	return __itoa_ncheck (__val, __s, __radix);
+ 142:	8e 01       	movw	r16, r28
+ 144:	0f 5f       	subi	r16, 0xFF	; 255
+ 146:	1f 4f       	sbci	r17, 0xFF	; 255
+	usart_tx("AT+CIPSERVER=1,80\r\n");
+	_delay_ms(2000);
+	
+    while (1) 
+    {
+		ADCSRA|=(1<<ADSC);				// Start conversion
+ 148:	36 9a       	sbi	0x06, 6	; 6
+		while(!(ADCSRA&(1<<ADIF)));
+ 14a:	34 9b       	sbis	0x06, 4	; 6
+ 14c:	fe cf       	rjmp	.-4      	; 0x14a <main+0xac>
+		as=ADC;
+ 14e:	84 b1       	in	r24, 0x04	; 4
+ 150:	95 b1       	in	r25, 0x05	; 5
+ 152:	90 93 8b 01 	sts	0x018B, r25	; 0x80018b <as+0x1>
+ 156:	80 93 8a 01 	sts	0x018A, r24	; 0x80018a <as>
+		//itoa(as,arr1,10);
+		//usart_tx(arr1);					//Now transmitting the decimal value from controller
+		//usart_tx("\r\n");				// (\r --> for new row)(\n --> for new line) both to press enter
+		//_delay_ms(1000);
+		PORTB=0B00000000;				// delay of one second
+ 15a:	18 ba       	out	0x18, r1	; 24
+		if(as<=130&&flag==0)
+ 15c:	80 91 8a 01 	lds	r24, 0x018A	; 0x80018a <as>
+ 160:	90 91 8b 01 	lds	r25, 0x018B	; 0x80018b <as+0x1>
+ 164:	83 38       	cpi	r24, 0x83	; 131
+ 166:	91 05       	cpc	r25, r1
+ 168:	a4 f5       	brge	.+104    	; 0x1d2 <main+0x134>
+ 16a:	a1 14       	cp	r10, r1
+ 16c:	b1 04       	cpc	r11, r1
+ 16e:	09 f0       	breq	.+2      	; 0x172 <main+0xd4>
+ 170:	63 c0       	rjmp	.+198    	; 0x238 <main+0x19a>
+ 172:	0f 2e       	mov	r0, r31
+ 174:	f3 e0       	ldi	r31, 0x03	; 3
+ 176:	ef 2e       	mov	r14, r31
+ 178:	f1 2c       	mov	r15, r1
+ 17a:	f0 2d       	mov	r31, r0
+		{
+			flag=1;
+			
+			for(int i=0;i<3;i++){
+				usart_tx("AT+CIPSTART=4,\"TCP\",\"184.106.153.149\",80\r\n");
+ 17c:	83 eb       	ldi	r24, 0xB3	; 179
+ 17e:	90 e0       	ldi	r25, 0x00	; 0
+ 180:	77 df       	rcall	.-274    	; 0x70 <usart_tx>
+ 182:	2f ef       	ldi	r18, 0xFF	; 255
+ 184:	8e e9       	ldi	r24, 0x9E	; 158
+ 186:	94 e2       	ldi	r25, 0x24	; 36
+ 188:	21 50       	subi	r18, 0x01	; 1
+ 18a:	80 40       	sbci	r24, 0x00	; 0
+ 18c:	90 40       	sbci	r25, 0x00	; 0
+ 18e:	e1 f7       	brne	.-8      	; 0x188 <main+0xea>
+ 190:	00 c0       	rjmp	.+0      	; 0x192 <main+0xf4>
+ 192:	00 00       	nop
+				_delay_ms(1000);
+				usart_tx("AT+CIPSEND=4,43\r\n");
+ 194:	8e ed       	ldi	r24, 0xDE	; 222
+ 196:	90 e0       	ldi	r25, 0x00	; 0
+ 198:	6b df       	rcall	.-298    	; 0x70 <usart_tx>
+ 19a:	2f e7       	ldi	r18, 0x7F	; 127
+ 19c:	8c ef       	ldi	r24, 0xFC	; 252
+ 19e:	9a e0       	ldi	r25, 0x0A	; 10
+ 1a0:	21 50       	subi	r18, 0x01	; 1
+ 1a2:	80 40       	sbci	r24, 0x00	; 0
+ 1a4:	90 40       	sbci	r25, 0x00	; 0
+ 1a6:	e1 f7       	brne	.-8      	; 0x1a0 <main+0x102>
+ 1a8:	00 c0       	rjmp	.+0      	; 0x1aa <main+0x10c>
+ 1aa:	00 00       	nop
+				_delay_ms(300);
+				usart_tx("GET /update?key=DGXX4163Z7XEXE2I&field1=1\r\n");
+ 1ac:	80 ef       	ldi	r24, 0xF0	; 240
+ 1ae:	90 e0       	ldi	r25, 0x00	; 0
+ 1b0:	5f df       	rcall	.-322    	; 0x70 <usart_tx>
+ 1b2:	2f ef       	ldi	r18, 0xFF	; 255
+ 1b4:	8e e9       	ldi	r24, 0x9E	; 158
+ 1b6:	94 e2       	ldi	r25, 0x24	; 36
+ 1b8:	21 50       	subi	r18, 0x01	; 1
+ 1ba:	80 40       	sbci	r24, 0x00	; 0
+ 1bc:	90 40       	sbci	r25, 0x00	; 0
+ 1be:	e1 f7       	brne	.-8      	; 0x1b8 <main+0x11a>
+ 1c0:	00 c0       	rjmp	.+0      	; 0x1c2 <main+0x124>
+ 1c2:	00 00       	nop
+ 1c4:	21 e0       	ldi	r18, 0x01	; 1
+ 1c6:	e2 1a       	sub	r14, r18
+ 1c8:	f1 08       	sbc	r15, r1
+		PORTB=0B00000000;				// delay of one second
+		if(as<=130&&flag==0)
+		{
+			flag=1;
+			
+			for(int i=0;i<3;i++){
+ 1ca:	c1 f6       	brne	.-80     	; 0x17c <main+0xde>
+		//usart_tx("\r\n");				// (\r --> for new row)(\n --> for new line) both to press enter
+		//_delay_ms(1000);
+		PORTB=0B00000000;				// delay of one second
+		if(as<=130&&flag==0)
+		{
+			flag=1;
+ 1cc:	a8 2c       	mov	r10, r8
+ 1ce:	b9 2c       	mov	r11, r9
+ 1d0:	33 c0       	rjmp	.+102    	; 0x238 <main+0x19a>
+				_delay_ms(1000);
+				//usart_tx("AT+CIPCLOSE=4\r\n");
+				//_delay_ms(1000);
+			}
+		}
+		else if(as>130&&flag==1)
+ 1d2:	81 e0       	ldi	r24, 0x01	; 1
+ 1d4:	a8 16       	cp	r10, r24
+ 1d6:	b1 04       	cpc	r11, r1
+ 1d8:	79 f5       	brne	.+94     	; 0x238 <main+0x19a>
+ 1da:	0f 2e       	mov	r0, r31
+ 1dc:	f3 e0       	ldi	r31, 0x03	; 3
+ 1de:	ef 2e       	mov	r14, r31
+ 1e0:	f1 2c       	mov	r15, r1
+ 1e2:	f0 2d       	mov	r31, r0
+		{
+			flag=0;
+			
+			for(int i=0;i<3;i++){
+				usart_tx("AT+CIPSTART=4,\"TCP\",\"184.106.153.149\",80\r\n");
+ 1e4:	83 eb       	ldi	r24, 0xB3	; 179
+ 1e6:	90 e0       	ldi	r25, 0x00	; 0
+ 1e8:	43 df       	rcall	.-378    	; 0x70 <usart_tx>
+ 1ea:	9f ef       	ldi	r25, 0xFF	; 255
+ 1ec:	2e e9       	ldi	r18, 0x9E	; 158
+ 1ee:	84 e2       	ldi	r24, 0x24	; 36
+ 1f0:	91 50       	subi	r25, 0x01	; 1
+ 1f2:	20 40       	sbci	r18, 0x00	; 0
+ 1f4:	80 40       	sbci	r24, 0x00	; 0
+ 1f6:	e1 f7       	brne	.-8      	; 0x1f0 <main+0x152>
+ 1f8:	00 c0       	rjmp	.+0      	; 0x1fa <main+0x15c>
+ 1fa:	00 00       	nop
+				_delay_ms(1000);
+				usart_tx("AT+CIPSEND=4,43\r\n");
+ 1fc:	8e ed       	ldi	r24, 0xDE	; 222
+ 1fe:	90 e0       	ldi	r25, 0x00	; 0
+ 200:	37 df       	rcall	.-402    	; 0x70 <usart_tx>
+ 202:	9f e7       	ldi	r25, 0x7F	; 127
+ 204:	2c ef       	ldi	r18, 0xFC	; 252
+ 206:	8a e0       	ldi	r24, 0x0A	; 10
+ 208:	91 50       	subi	r25, 0x01	; 1
+ 20a:	20 40       	sbci	r18, 0x00	; 0
+ 20c:	80 40       	sbci	r24, 0x00	; 0
+ 20e:	e1 f7       	brne	.-8      	; 0x208 <main+0x16a>
+ 210:	00 c0       	rjmp	.+0      	; 0x212 <main+0x174>
+ 212:	00 00       	nop
+				_delay_ms(300);
+				usart_tx("GET /update?key=DGXX4163Z7XEXE2I&field1=0\r\n");
+ 214:	8c e1       	ldi	r24, 0x1C	; 28
+ 216:	91 e0       	ldi	r25, 0x01	; 1
+ 218:	2b df       	rcall	.-426    	; 0x70 <usart_tx>
+ 21a:	9f ef       	ldi	r25, 0xFF	; 255
+ 21c:	2e e9       	ldi	r18, 0x9E	; 158
+ 21e:	84 e2       	ldi	r24, 0x24	; 36
+ 220:	91 50       	subi	r25, 0x01	; 1
+ 222:	20 40       	sbci	r18, 0x00	; 0
+ 224:	80 40       	sbci	r24, 0x00	; 0
+ 226:	e1 f7       	brne	.-8      	; 0x220 <main+0x182>
+ 228:	00 c0       	rjmp	.+0      	; 0x22a <main+0x18c>
+ 22a:	00 00       	nop
+ 22c:	91 e0       	ldi	r25, 0x01	; 1
+ 22e:	e9 1a       	sub	r14, r25
+ 230:	f1 08       	sbc	r15, r1
+		}
+		else if(as>130&&flag==1)
+		{
+			flag=0;
+			
+			for(int i=0;i<3;i++){
+ 232:	c1 f6       	brne	.-80     	; 0x1e4 <main+0x146>
+				//_delay_ms(1000);
+			}
+		}
+		else if(as>130&&flag==1)
+		{
+			flag=0;
+ 234:	a6 2c       	mov	r10, r6
+ 236:	b7 2c       	mov	r11, r7
+				//usart_tx("AT+CIPCLOSE=4\r\n");
+				//_delay_ms(1000);
+			}
+		}
+		
+		if((PINB&0x01)==0x01){
+ 238:	b0 9b       	sbis	0x16, 0	; 22
+ 23a:	5b c0       	rjmp	.+182    	; 0x2f2 <main+0x254>
+			while(1){
+				if((PINB&0B00000010)==0B00000010){
+ 23c:	b1 9b       	sbis	0x16, 1	; 22
+ 23e:	fe cf       	rjmp	.-4      	; 0x23c <main+0x19e>
+					attend++;
+ 240:	2f ef       	ldi	r18, 0xFF	; 255
+ 242:	c2 1a       	sub	r12, r18
+ 244:	d2 0a       	sbc	r13, r18
+ 246:	4a e0       	ldi	r20, 0x0A	; 10
+ 248:	b8 01       	movw	r22, r16
+ 24a:	c6 01       	movw	r24, r12
+ 24c:	b0 d0       	rcall	.+352    	; 0x3ae <__itoa_ncheck>
+					itoa(attend,arr,10);
+					L = strlen(arr)+42;
+ 24e:	f8 01       	movw	r30, r16
+ 250:	01 90       	ld	r0, Z+
+ 252:	00 20       	and	r0, r0
+ 254:	e9 f7       	brne	.-6      	; 0x250 <main+0x1b2>
+ 256:	cf 01       	movw	r24, r30
+ 258:	80 1b       	sub	r24, r16
+ 25a:	91 0b       	sbc	r25, r17
+ 25c:	89 96       	adiw	r24, 0x29	; 41
+ 25e:	90 93 8d 01 	sts	0x018D, r25	; 0x80018d <L+0x1>
+ 262:	80 93 8c 01 	sts	0x018C, r24	; 0x80018c <L>
+ 266:	4a e0       	ldi	r20, 0x0A	; 10
+ 268:	60 e8       	ldi	r22, 0x80	; 128
+ 26a:	71 e0       	ldi	r23, 0x01	; 1
+ 26c:	a0 d0       	rcall	.+320    	; 0x3ae <__itoa_ncheck>
+ 26e:	0f 2e       	mov	r0, r31
+ 270:	f3 e0       	ldi	r31, 0x03	; 3
+ 272:	ef 2e       	mov	r14, r31
+ 274:	f1 2c       	mov	r15, r1
+ 276:	f0 2d       	mov	r31, r0
+					itoa(L,arr1,10);
+					//usart_tx(arr1);
+					//usart_tx("\r\n");
+					for(int i=0;i<3;i++)
+					{
+						usart_tx("AT+CIPSTART=4,\"TCP\",\"184.106.153.149\",80\r\n");
+ 278:	83 eb       	ldi	r24, 0xB3	; 179
+ 27a:	90 e0       	ldi	r25, 0x00	; 0
+ 27c:	f9 de       	rcall	.-526    	; 0x70 <usart_tx>
+ 27e:	8f ef       	ldi	r24, 0xFF	; 255
+ 280:	9e e9       	ldi	r25, 0x9E	; 158
+ 282:	24 e2       	ldi	r18, 0x24	; 36
+ 284:	81 50       	subi	r24, 0x01	; 1
+ 286:	90 40       	sbci	r25, 0x00	; 0
+ 288:	20 40       	sbci	r18, 0x00	; 0
+ 28a:	e1 f7       	brne	.-8      	; 0x284 <main+0x1e6>
+ 28c:	00 c0       	rjmp	.+0      	; 0x28e <main+0x1f0>
+ 28e:	00 00       	nop
+						_delay_ms(1000);
+						usart_tx("AT+CIPSEND=4,");
+ 290:	88 e4       	ldi	r24, 0x48	; 72
+ 292:	91 e0       	ldi	r25, 0x01	; 1
+ 294:	ed de       	rcall	.-550    	; 0x70 <usart_tx>
+						usart_tx(arr1);
+ 296:	80 e8       	ldi	r24, 0x80	; 128
+ 298:	91 e0       	ldi	r25, 0x01	; 1
+ 29a:	ea de       	rcall	.-556    	; 0x70 <usart_tx>
+						usart_tx("\r\n");
+ 29c:	8e e8       	ldi	r24, 0x8E	; 142
+ 29e:	90 e0       	ldi	r25, 0x00	; 0
+ 2a0:	e7 de       	rcall	.-562    	; 0x70 <usart_tx>
+ 2a2:	8f e7       	ldi	r24, 0x7F	; 127
+ 2a4:	9c ef       	ldi	r25, 0xFC	; 252
+ 2a6:	2a e0       	ldi	r18, 0x0A	; 10
+ 2a8:	81 50       	subi	r24, 0x01	; 1
+ 2aa:	90 40       	sbci	r25, 0x00	; 0
+ 2ac:	20 40       	sbci	r18, 0x00	; 0
+ 2ae:	e1 f7       	brne	.-8      	; 0x2a8 <main+0x20a>
+ 2b0:	00 c0       	rjmp	.+0      	; 0x2b2 <main+0x214>
+ 2b2:	00 00       	nop
+						_delay_ms(300);
+						usart_tx("GET /update?key=DGXX4163Z7XEXE2I&field3=");
+ 2b4:	86 e5       	ldi	r24, 0x56	; 86
+ 2b6:	91 e0       	ldi	r25, 0x01	; 1
+ 2b8:	db de       	rcall	.-586    	; 0x70 <usart_tx>
+						usart_tx(arr);
+ 2ba:	c8 01       	movw	r24, r16
+ 2bc:	d9 de       	rcall	.-590    	; 0x70 <usart_tx>
+						usart_tx("\r\n");
+ 2be:	8e e8       	ldi	r24, 0x8E	; 142
+ 2c0:	90 e0       	ldi	r25, 0x00	; 0
+ 2c2:	d6 de       	rcall	.-596    	; 0x70 <usart_tx>
+ 2c4:	8f ef       	ldi	r24, 0xFF	; 255
+ 2c6:	9e e9       	ldi	r25, 0x9E	; 158
+ 2c8:	24 e2       	ldi	r18, 0x24	; 36
+ 2ca:	81 50       	subi	r24, 0x01	; 1
+ 2cc:	90 40       	sbci	r25, 0x00	; 0
+ 2ce:	20 40       	sbci	r18, 0x00	; 0
+ 2d0:	e1 f7       	brne	.-8      	; 0x2ca <main+0x22c>
+ 2d2:	00 c0       	rjmp	.+0      	; 0x2d4 <main+0x236>
+ 2d4:	00 00       	nop
+ 2d6:	81 e0       	ldi	r24, 0x01	; 1
+ 2d8:	e8 1a       	sub	r14, r24
+ 2da:	f1 08       	sbc	r15, r1
+					itoa(attend,arr,10);
+					L = strlen(arr)+42;
+					itoa(L,arr1,10);
+					//usart_tx(arr1);
+					//usart_tx("\r\n");
+					for(int i=0;i<3;i++)
+ 2dc:	69 f6       	brne	.-102    	; 0x278 <main+0x1da>
+ 2de:	9f e7       	ldi	r25, 0x7F	; 127
+ 2e0:	2f e4       	ldi	r18, 0x4F	; 79
+ 2e2:	82 e1       	ldi	r24, 0x12	; 18
+ 2e4:	91 50       	subi	r25, 0x01	; 1
+ 2e6:	20 40       	sbci	r18, 0x00	; 0
+ 2e8:	80 40       	sbci	r24, 0x00	; 0
+ 2ea:	e1 f7       	brne	.-8      	; 0x2e4 <main+0x246>
+ 2ec:	00 c0       	rjmp	.+0      	; 0x2ee <main+0x250>
+ 2ee:	00 00       	nop
+					}
+					break;
+				}
+			}
+			_delay_ms(500);
+			PORTB=0B00000000;
+ 2f0:	18 ba       	out	0x18, r1	; 24
+		}
+		if((PINB&0B00000010)==0B00000010){
+ 2f2:	b1 9b       	sbis	0x16, 1	; 22
+ 2f4:	29 cf       	rjmp	.-430    	; 0x148 <main+0xaa>
+			while(1){
+				if((PINB&0x01)==0x01){
+ 2f6:	b0 9b       	sbis	0x16, 0	; 22
+ 2f8:	fe cf       	rjmp	.-4      	; 0x2f6 <main+0x258>
+					attend--;
+ 2fa:	91 e0       	ldi	r25, 0x01	; 1
+ 2fc:	c9 1a       	sub	r12, r25
+ 2fe:	d1 08       	sbc	r13, r1
+ 300:	4a e0       	ldi	r20, 0x0A	; 10
+ 302:	b8 01       	movw	r22, r16
+ 304:	c6 01       	movw	r24, r12
+ 306:	53 d0       	rcall	.+166    	; 0x3ae <__itoa_ncheck>
+					itoa(attend,arr,10);
+					L = strlen(arr)+42;
+ 308:	f8 01       	movw	r30, r16
+ 30a:	01 90       	ld	r0, Z+
+ 30c:	00 20       	and	r0, r0
+ 30e:	e9 f7       	brne	.-6      	; 0x30a <main+0x26c>
+ 310:	cf 01       	movw	r24, r30
+ 312:	80 1b       	sub	r24, r16
+ 314:	91 0b       	sbc	r25, r17
+ 316:	89 96       	adiw	r24, 0x29	; 41
+ 318:	90 93 8d 01 	sts	0x018D, r25	; 0x80018d <L+0x1>
+ 31c:	80 93 8c 01 	sts	0x018C, r24	; 0x80018c <L>
+ 320:	4a e0       	ldi	r20, 0x0A	; 10
+ 322:	60 e8       	ldi	r22, 0x80	; 128
+ 324:	71 e0       	ldi	r23, 0x01	; 1
+ 326:	43 d0       	rcall	.+134    	; 0x3ae <__itoa_ncheck>
+ 328:	0f 2e       	mov	r0, r31
+ 32a:	f3 e0       	ldi	r31, 0x03	; 3
+ 32c:	ef 2e       	mov	r14, r31
+ 32e:	f1 2c       	mov	r15, r1
+ 330:	f0 2d       	mov	r31, r0
+					itoa(L,arr1,10);
+					//usart_tx(arr1);
+					//usart_tx("\r\n");
+					for(int i=0;i<3;i++)
+					{
+						usart_tx("AT+CIPSTART=4,\"TCP\",\"184.106.153.149\",80\r\n");
+ 332:	83 eb       	ldi	r24, 0xB3	; 179
+ 334:	90 e0       	ldi	r25, 0x00	; 0
+ 336:	9c de       	rcall	.-712    	; 0x70 <usart_tx>
+ 338:	2f ef       	ldi	r18, 0xFF	; 255
+ 33a:	8e e9       	ldi	r24, 0x9E	; 158
+ 33c:	94 e2       	ldi	r25, 0x24	; 36
+ 33e:	21 50       	subi	r18, 0x01	; 1
+ 340:	80 40       	sbci	r24, 0x00	; 0
+ 342:	90 40       	sbci	r25, 0x00	; 0
+ 344:	e1 f7       	brne	.-8      	; 0x33e <main+0x2a0>
+ 346:	00 c0       	rjmp	.+0      	; 0x348 <main+0x2aa>
+ 348:	00 00       	nop
+						_delay_ms(1000);
+						usart_tx("AT+CIPSEND=4,");
+ 34a:	88 e4       	ldi	r24, 0x48	; 72
+ 34c:	91 e0       	ldi	r25, 0x01	; 1
+ 34e:	90 de       	rcall	.-736    	; 0x70 <usart_tx>
+						usart_tx(arr1);
+ 350:	80 e8       	ldi	r24, 0x80	; 128
+ 352:	91 e0       	ldi	r25, 0x01	; 1
+ 354:	8d de       	rcall	.-742    	; 0x70 <usart_tx>
+						usart_tx("\r\n");
+ 356:	8e e8       	ldi	r24, 0x8E	; 142
+ 358:	90 e0       	ldi	r25, 0x00	; 0
+ 35a:	8a de       	rcall	.-748    	; 0x70 <usart_tx>
+ 35c:	2f e7       	ldi	r18, 0x7F	; 127
+ 35e:	8c ef       	ldi	r24, 0xFC	; 252
+ 360:	9a e0       	ldi	r25, 0x0A	; 10
+ 362:	21 50       	subi	r18, 0x01	; 1
+ 364:	80 40       	sbci	r24, 0x00	; 0
+ 366:	90 40       	sbci	r25, 0x00	; 0
+ 368:	e1 f7       	brne	.-8      	; 0x362 <main+0x2c4>
+ 36a:	00 c0       	rjmp	.+0      	; 0x36c <main+0x2ce>
+ 36c:	00 00       	nop
+						_delay_ms(300);
+						usart_tx("GET /update?key=DGXX4163Z7XEXE2I&field3=");
+ 36e:	86 e5       	ldi	r24, 0x56	; 86
+ 370:	91 e0       	ldi	r25, 0x01	; 1
+ 372:	7e de       	rcall	.-772    	; 0x70 <usart_tx>
+						usart_tx(arr);
+ 374:	c8 01       	movw	r24, r16
+ 376:	7c de       	rcall	.-776    	; 0x70 <usart_tx>
+						usart_tx("\r\n");
+ 378:	8e e8       	ldi	r24, 0x8E	; 142
+ 37a:	90 e0       	ldi	r25, 0x00	; 0
+ 37c:	79 de       	rcall	.-782    	; 0x70 <usart_tx>
+ 37e:	2f ef       	ldi	r18, 0xFF	; 255
+ 380:	8e e9       	ldi	r24, 0x9E	; 158
+ 382:	94 e2       	ldi	r25, 0x24	; 36
+ 384:	21 50       	subi	r18, 0x01	; 1
+ 386:	80 40       	sbci	r24, 0x00	; 0
+ 388:	90 40       	sbci	r25, 0x00	; 0
+ 38a:	e1 f7       	brne	.-8      	; 0x384 <main+0x2e6>
+ 38c:	00 c0       	rjmp	.+0      	; 0x38e <main+0x2f0>
+ 38e:	00 00       	nop
+ 390:	21 e0       	ldi	r18, 0x01	; 1
+ 392:	e2 1a       	sub	r14, r18
+ 394:	f1 08       	sbc	r15, r1
+					itoa(attend,arr,10);
+					L = strlen(arr)+42;
+					itoa(L,arr1,10);
+					//usart_tx(arr1);
+					//usart_tx("\r\n");
+					for(int i=0;i<3;i++)
+ 396:	69 f6       	brne	.-102    	; 0x332 <main+0x294>
+ 398:	8f e7       	ldi	r24, 0x7F	; 127
+ 39a:	9f e4       	ldi	r25, 0x4F	; 79
+ 39c:	22 e1       	ldi	r18, 0x12	; 18
+ 39e:	81 50       	subi	r24, 0x01	; 1
+ 3a0:	90 40       	sbci	r25, 0x00	; 0
+ 3a2:	20 40       	sbci	r18, 0x00	; 0
+ 3a4:	e1 f7       	brne	.-8      	; 0x39e <main+0x300>
+ 3a6:	00 c0       	rjmp	.+0      	; 0x3a8 <main+0x30a>
+ 3a8:	00 00       	nop
+					}
+					break;
+				}
+			}
+			_delay_ms(500);
+			PORTB=0B00000000;
+ 3aa:	18 ba       	out	0x18, r1	; 24
+ 3ac:	cd ce       	rjmp	.-614    	; 0x148 <main+0xaa>
+
+000003ae <__itoa_ncheck>:
+ 3ae:	bb 27       	eor	r27, r27
+ 3b0:	4a 30       	cpi	r20, 0x0A	; 10
+ 3b2:	31 f4       	brne	.+12     	; 0x3c0 <__itoa_ncheck+0x12>
+ 3b4:	99 23       	and	r25, r25
+ 3b6:	22 f4       	brpl	.+8      	; 0x3c0 <__itoa_ncheck+0x12>
+ 3b8:	bd e2       	ldi	r27, 0x2D	; 45
+ 3ba:	90 95       	com	r25
+ 3bc:	81 95       	neg	r24
+ 3be:	9f 4f       	sbci	r25, 0xFF	; 255
+ 3c0:	01 c0       	rjmp	.+2      	; 0x3c4 <__utoa_common>
+
+000003c2 <__utoa_ncheck>:
+ 3c2:	bb 27       	eor	r27, r27
+
+000003c4 <__utoa_common>:
+ 3c4:	fb 01       	movw	r30, r22
+ 3c6:	55 27       	eor	r21, r21
+ 3c8:	aa 27       	eor	r26, r26
+ 3ca:	88 0f       	add	r24, r24
+ 3cc:	99 1f       	adc	r25, r25
+ 3ce:	aa 1f       	adc	r26, r26
+ 3d0:	a4 17       	cp	r26, r20
+ 3d2:	10 f0       	brcs	.+4      	; 0x3d8 <__utoa_common+0x14>
+ 3d4:	a4 1b       	sub	r26, r20
+ 3d6:	83 95       	inc	r24
+ 3d8:	50 51       	subi	r21, 0x10	; 16
+ 3da:	b9 f7       	brne	.-18     	; 0x3ca <__utoa_common+0x6>
+ 3dc:	a0 5d       	subi	r26, 0xD0	; 208
+ 3de:	aa 33       	cpi	r26, 0x3A	; 58
+ 3e0:	08 f0       	brcs	.+2      	; 0x3e4 <__utoa_common+0x20>
+ 3e2:	a9 5d       	subi	r26, 0xD9	; 217
+ 3e4:	a1 93       	st	Z+, r26
+ 3e6:	00 97       	sbiw	r24, 0x00	; 0
+ 3e8:	79 f7       	brne	.-34     	; 0x3c8 <__utoa_common+0x4>
+ 3ea:	b1 11       	cpse	r27, r1
+ 3ec:	b1 93       	st	Z+, r27
+ 3ee:	11 92       	st	Z+, r1
+ 3f0:	cb 01       	movw	r24, r22
+ 3f2:	00 c0       	rjmp	.+0      	; 0x3f4 <strrev>
+
+000003f4 <strrev>:
+ 3f4:	dc 01       	movw	r26, r24
+ 3f6:	fc 01       	movw	r30, r24
+ 3f8:	67 2f       	mov	r22, r23
+ 3fa:	71 91       	ld	r23, Z+
+ 3fc:	77 23       	and	r23, r23
+ 3fe:	e1 f7       	brne	.-8      	; 0x3f8 <strrev+0x4>
+ 400:	32 97       	sbiw	r30, 0x02	; 2
+ 402:	04 c0       	rjmp	.+8      	; 0x40c <__LOCK_REGION_LENGTH__+0xc>
+ 404:	7c 91       	ld	r23, X
+ 406:	6d 93       	st	X+, r22
+ 408:	70 83       	st	Z, r23
+ 40a:	62 91       	ld	r22, -Z
+ 40c:	ae 17       	cp	r26, r30
+ 40e:	bf 07       	cpc	r27, r31
+ 410:	c8 f3       	brcs	.-14     	; 0x404 <__LOCK_REGION_LENGTH__+0x4>
+ 412:	08 95       	ret
+
+00000414 <_exit>:
+ 414:	f8 94       	cli
+
+00000416 <__stop_program>:
+ 416:	ff cf       	rjmp	.-2      	; 0x416 <__stop_program>
